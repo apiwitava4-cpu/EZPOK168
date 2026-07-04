@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EZPOK168 BIO</title>
-<meta name="theme-color" content="#100716">
+<meta name="theme-color" content="#12051f">
 
 <style>
 * {
@@ -14,50 +14,94 @@
 }
 
 :root {
-  --bg: #09040f;
-  --panel: rgba(18, 10, 26, .94);
-  --text: #fff7e8;
-  --muted: rgba(255, 247, 232, .78);
-  --gold: #f8d76b;
-  --violet: #7b2cff;
-  --magenta: #da3cff;
-  --line: rgba(248, 215, 107, .4);
+  --bg: #05030d;
+  --panel: rgba(12, 8, 24, .68);
+  --text: #fffaf0;
+  --muted: rgba(255, 250, 240, .82);
+  --gold: #f6ca3d;
+  --gold-soft: #fff4b8;
+  --violet: #8c35ff;
+  --magenta: #e24cff;
+  --cyan: #32c7ff;
+  --line: rgba(255, 228, 123, .48);
   font-family: Arial, "Tahoma", sans-serif;
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   padding: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text);
+  background: var(--bg) url("brand/bio-background.webp") center / cover fixed no-repeat;
+  isolation: isolate;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
   background:
-    radial-gradient(circle at 18% 12%, rgba(218, 60, 255, .22), transparent 32%),
-    radial-gradient(circle at 88% 22%, rgba(248, 215, 107, .18), transparent 28%),
-    linear-gradient(180deg, #09040f 0%, #191024 48%, #08050d 100%);
+    linear-gradient(180deg, rgba(4, 3, 14, .12), rgba(5, 2, 12, .78)),
+    radial-gradient(ellipse at 50% 38%, rgba(255, 255, 255, .08), transparent 45%),
+    radial-gradient(ellipse at 78% 24%, rgba(226, 76, 255, .3), transparent 42%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(50, 199, 255, .18), transparent 24%, transparent 74%, rgba(246, 202, 61, .15)),
+    rgba(2, 1, 7, .24);
+  backdrop-filter: blur(3px) saturate(1.18);
 }
 
 .card {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 430px;
-  padding: 28px;
+  padding: 26px;
   text-align: center;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 18px;
-  box-shadow: 0 24px 78px rgba(0, 0, 0, .48), 0 0 36px rgba(123, 44, 255, .22);
+  border-radius: 24px;
+  box-shadow:
+    0 24px 78px rgba(0, 0, 0, .56),
+    0 0 0 1px rgba(255, 255, 255, .1) inset,
+    0 0 48px rgba(140, 53, 255, .34);
+  backdrop-filter: blur(18px) saturate(1.3);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: 23px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .02) 38%, rgba(140, 53, 255, .16));
 }
 
 .profile {
-  width: 154px;
-  height: 154px;
-  margin: 0 auto 20px;
+  width: 176px;
+  height: 176px;
+  margin: 0 auto 22px;
   overflow: hidden;
   border: 3px solid var(--gold);
-  border-radius: 50%;
+  border-radius: 28px;
   background: #07040c;
-  box-shadow: 0 0 30px rgba(248, 215, 107, .24);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, .22) inset,
+    0 0 28px rgba(246, 202, 61, .36),
+    0 0 46px rgba(226, 76, 255, .35);
 }
 
 .profile img {
@@ -70,9 +114,10 @@ body {
 
 h1 {
   margin-bottom: 8px;
-  color: var(--gold);
+  color: var(--gold-soft);
   font-size: 32px;
   line-height: 1.15;
+  text-shadow: 0 2px 0 rgba(83, 48, 0, .9), 0 0 24px rgba(246, 202, 61, .45);
 }
 
 p {
@@ -91,21 +136,31 @@ p {
   margin-bottom: 14px;
   padding: 14px 16px;
   border: 0;
-  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .32);
+  border-radius: 16px;
   color: #120716;
-  background: linear-gradient(90deg, var(--gold), #c58f24 48%, var(--magenta));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, 0) 34%),
+    linear-gradient(100deg, #ffffff 0%, var(--gold-soft) 20%, var(--gold) 48%, #b85fff 76%, var(--cyan) 100%);
   font-size: 18px;
   font-weight: 800;
   line-height: 1.25;
   text-decoration: none;
   cursor: pointer;
+  box-shadow:
+    0 12px 26px rgba(7, 3, 20, .38),
+    0 0 0 1px rgba(86, 39, 0, .18) inset,
+    0 0 22px rgba(226, 76, 255, .22);
   transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
 }
 
 .btn:hover,
 .btn:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(218, 60, 255, .25);
+  box-shadow:
+    0 16px 32px rgba(7, 3, 20, .45),
+    0 0 26px rgba(246, 202, 61, .28),
+    0 0 30px rgba(226, 76, 255, .35);
   filter: brightness(1.06);
   outline: none;
 }
@@ -125,6 +180,7 @@ footer {
   justify-content: center;
   padding: 20px;
   background: rgba(5, 2, 9, .84);
+  backdrop-filter: blur(10px);
 }
 
 .modal.is-open {
@@ -138,10 +194,12 @@ footer {
   max-height: 88vh;
   overflow: auto;
   padding: 22px;
-  background: #100716;
+  background:
+    linear-gradient(180deg, rgba(22, 10, 42, .96), rgba(8, 5, 17, .98)),
+    url("brand/bio-background.webp") center / cover no-repeat;
   border: 1px solid var(--gold);
-  border-radius: 18px;
-  box-shadow: 0 20px 65px rgba(0, 0, 0, .5);
+  border-radius: 22px;
+  box-shadow: 0 20px 65px rgba(0, 0, 0, .6), 0 0 42px rgba(140, 53, 255, .28);
 }
 
 .close {
@@ -167,10 +225,11 @@ footer {
 
 .modal h2 {
   padding-right: 38px;
-  color: var(--gold);
+  color: var(--gold-soft);
   text-align: center;
   font-size: 24px;
   line-height: 1.25;
+  text-shadow: 0 0 18px rgba(246, 202, 61, .38);
 }
 
 .gallery {
@@ -184,9 +243,9 @@ footer {
   margin: 0;
   overflow: hidden;
   border: 1px solid rgba(248, 215, 107, .35);
-  border-radius: 12px;
+  border-radius: 16px;
   background: #050208;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, .32);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .36), 0 0 20px rgba(140, 53, 255, .18);
 }
 
 .promo-card img {
@@ -222,8 +281,9 @@ footer {
   }
 
   .profile {
-    width: 132px;
-    height: 132px;
+    width: 148px;
+    height: 148px;
+    border-radius: 24px;
   }
 
   h1 {
