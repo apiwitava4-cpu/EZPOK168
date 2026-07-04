@@ -24,6 +24,7 @@
   --magenta: #e24cff;
   --cyan: #32c7ff;
   --line: rgba(255, 228, 123, .48);
+  --bio-background-image: url("brand/bio-background.webp");
   font-family: Arial, "Tahoma", sans-serif;
 }
 
@@ -35,7 +36,7 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--text);
-  background: var(--bg) url("brand/bio-background.webp") center / cover fixed no-repeat;
+  background: var(--bg) var(--bio-background-image) center / cover fixed no-repeat;
   isolation: isolate;
   overflow-x: hidden;
 }
@@ -196,7 +197,7 @@ footer {
   padding: 22px;
   background:
     linear-gradient(180deg, rgba(22, 10, 42, .96), rgba(8, 5, 17, .98)),
-    url("brand/bio-background.webp") center / cover no-repeat;
+    var(--bio-background-image) center / cover no-repeat;
   border: 1px solid var(--gold);
   border-radius: 22px;
   box-shadow: 0 20px 65px rgba(0, 0, 0, .6), 0 0 42px rgba(140, 53, 255, .28);
@@ -300,12 +301,13 @@ footer {
 <body>
 <main class="card">
   <div class="profile" aria-label="EZPOK168">
-    <img src="brand/brand-profile.webp" alt="EZPOK168">
+    <img id="bioProfileImage" src="brand/brand-profile.webp" alt="EZPOK168">
   </div>
 
-  <h1>EZPOK168</h1>
-  <p>บ้านป๊อกเด้งออนไลน์ โปรโมชั่นครบ จบในที่เดียว</p>
+  <h1 id="bioTitle">EZPOK168</h1>
+  <p id="bioSubtitle">บ้านป๊อกเด้งออนไลน์ โปรโมชั่นครบ จบในที่เดียว</p>
 
+  <div id="bioButtons">
   <a
     class="btn"
     href="https://www.ezpok168.net/?utm_source=bio&utm_medium=button&utm_campaign=ezpok168_service"
@@ -340,7 +342,9 @@ footer {
     ติดต่อแอดมิน
   </a>
 
-  <footer>&copy; EZPOK168 BIO</footer>
+  </div>
+
+  <footer id="bioFooter">&copy; EZPOK168 BIO</footer>
 </main>
 
 <div class="modal" id="promoModal" aria-hidden="true">
@@ -348,7 +352,7 @@ footer {
     <button class="close" type="button" aria-label="ปิดหน้าต่าง">&times;</button>
     <h2 id="promoTitle">โปรโมชั่นล่าสุด</h2>
 
-    <div class="gallery">
+    <div class="gallery" id="promoGallery">
       <figure class="promo-card">
         <img src="promo/promo-register-5.webp" alt="โปรโมชั่นสมัครสมาชิกใหม่">
         <figcaption>สมัครสมาชิกใหม่</figcaption>
@@ -411,6 +415,64 @@ const trackedButtonDefaults = {
   "contact-admin": "ติดต่อแอดมิน"
 };
 
+const defaultBioConfig = {
+  title: "EZPOK168",
+  subtitle: "บ้านป๊อกเด้งออนไลน์ โปรโมชั่นครบ จบในที่เดียว",
+  profileImage: "brand/brand-profile.webp",
+  backgroundImage: "brand/bio-background.webp",
+  footer: "© EZPOK168 BIO",
+  buttons: [
+    {
+      id: "visit-site",
+      label: "เข้าชมหน้าเว็บ",
+      href: "https://www.ezpok168.net/?utm_source=bio&utm_medium=button&utm_campaign=ezpok168_service",
+      trackId: "visit-site",
+      action: "link",
+      enabled: true,
+      targetBlank: true
+    },
+    {
+      id: "register",
+      label: "สมัครสมาชิก",
+      href: "https://www.ezpok168.net/?utm_source=bio&utm_medium=button&utm_campaign=ezpok168_register",
+      trackId: "register",
+      action: "link",
+      enabled: true,
+      targetBlank: true
+    },
+    {
+      id: "promotion",
+      label: "โปรโมชั่น",
+      href: "#",
+      trackId: "promotion",
+      action: "promo",
+      enabled: true,
+      targetBlank: false
+    },
+    {
+      id: "contact-admin",
+      label: "ติดต่อแอดมิน",
+      href: "https://line.me/R/ti/p/@EZPOK?utm_source=bio&utm_medium=button&utm_campaign=ezpok168_service",
+      trackId: "contact-admin",
+      action: "link",
+      enabled: true,
+      targetBlank: true
+    }
+  ],
+  promoImages: [
+    { id: "promo-register-5", src: "promo/promo-register-5.webp", caption: "สมัครสมาชิกใหม่", alt: "โปรโมชั่นสมัครสมาชิกใหม่", enabled: true },
+    { id: "promo-deposit-60", src: "promo/promo-deposit-60.webp", caption: "ฝาก 60 บาท", alt: "โปรโมชั่นฝาก 60 บาท", enabled: true },
+    { id: "promo-top100", src: "promo/promo-top100.webp", caption: "TOP100", alt: "โปรโมชั่น TOP100", enabled: true },
+    { id: "promo-one-click", src: "promo/promo-one-click.webp", caption: "แทงไม้เดียว", alt: "โปรโมชั่นแทงไม้เดียว", enabled: true },
+    { id: "promo-first-deposit-10", src: "promo/promo-first-deposit-10.webp", caption: "ฝากบิลแรก", alt: "โปรโมชั่นฝากบิลแรก", enabled: true },
+    { id: "promo-cashback-2", src: "promo/promo-cashback-2.webp", caption: "คืนยอด 2%", alt: "โปรโมชั่นคืนยอด 2 เปอร์เซ็นต์", enabled: true },
+    { id: "promo-world-cup", src: "promo/promo-world-cup.webp", caption: "FIFA World Cup 2026", alt: "โปรโมชั่น FIFA World Cup 2026", enabled: true },
+    { id: "promo-top10", src: "promo/promo-top10.webp", caption: "TOP10", alt: "โปรโมชั่น TOP10", enabled: true },
+    { id: "promo-deposit-60-doomday", src: "promo/promo-deposit-60-doomday.webp", caption: "ฝาก 60 เพิ่ม doomsday", alt: "โปรโมชั่นฝาก 60 เพิ่ม doomsday", enabled: true },
+    { id: "promo-cashback-2-special", src: "promo/promo-cashback-2-special.webp", caption: "คืนยอดเสีย 2%", alt: "โปรโมชั่นคืนยอดเสีย 2 เปอร์เซ็นต์", enabled: true }
+  ]
+};
+
 function cleanSourceId(value) {
   return String(value || "")
     .trim()
@@ -437,6 +499,89 @@ function getCurrentBioSource() {
 }
 
 const currentBioSource = getCurrentBioSource();
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function safeCssUrl(value) {
+  return String(value || "brand/bio-background.webp").replace(/["\\\n\r]/g, "");
+}
+
+function mergeBioConfig(config) {
+  const input = config && typeof config === "object" ? config : {};
+  return {
+    ...defaultBioConfig,
+    ...input,
+    buttons: Array.isArray(input.buttons) ? input.buttons : defaultBioConfig.buttons,
+    promoImages: Array.isArray(input.promoImages) ? input.promoImages : defaultBioConfig.promoImages
+  };
+}
+
+function renderBioConfig(config) {
+  const normalized = mergeBioConfig(config);
+  const profileImage = document.getElementById("bioProfileImage");
+  const buttons = document.getElementById("bioButtons");
+  const gallery = document.getElementById("promoGallery");
+
+  document.getElementById("bioTitle").textContent = normalized.title || "EZPOK168";
+  document.getElementById("bioSubtitle").textContent = normalized.subtitle || "";
+  document.getElementById("bioFooter").textContent = normalized.footer || "© EZPOK168 BIO";
+  document.documentElement.style.setProperty("--bio-background-image", `url("${safeCssUrl(normalized.backgroundImage)}")`);
+  profileImage.src = normalized.profileImage || "brand/brand-profile.webp";
+  profileImage.alt = normalized.title || "EZPOK168";
+
+  buttons.innerHTML = normalized.buttons
+    .filter(function (button) {
+      return button && button.enabled !== false && button.label;
+    })
+    .map(function (button) {
+      const action = button.action === "promo" ? "promo" : "link";
+      const id = cleanSourceId(button.id || button.trackId || button.label) || "button";
+      const trackId = cleanSourceId(button.trackId || id) || id;
+      const href = action === "promo" ? "#" : (button.href || "#");
+      const target = action === "promo" || button.targetBlank === false ? "" : ' target="_blank" rel="noopener noreferrer"';
+      const promoAttrs = action === "promo" ? ' id="promoBtn" role="button" aria-controls="promoModal" aria-expanded="false" data-promo-button="true"' : "";
+
+      return `<a class="btn" href="${escapeHtml(href)}" data-track-id="${escapeHtml(trackId)}" data-track-label="${escapeHtml(button.label)}"${promoAttrs}${target}>${escapeHtml(button.label)}</a>`;
+    }).join("");
+
+  gallery.innerHTML = normalized.promoImages
+    .filter(function (image) {
+      return image && image.enabled !== false && image.src;
+    })
+    .map(function (image) {
+      const caption = image.caption || "โปรโมชั่น";
+      return `
+        <figure class="promo-card">
+          <img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || caption)}">
+          <figcaption>${escapeHtml(caption)}</figcaption>
+        </figure>
+      `;
+    }).join("") || '<p class="empty-state">ยังไม่มีรูปโปรโมชั่น</p>';
+}
+
+async function loadBioConfig() {
+  if (window.location.protocol === "file:") {
+    renderBioConfig(defaultBioConfig);
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/bio-config", { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error("config_failed");
+    }
+    renderBioConfig(await response.json());
+  } catch (error) {
+    renderBioConfig(defaultBioConfig);
+  }
+}
 
 function createClickStats() {
   return {
@@ -552,33 +697,42 @@ function recordClick(button) {
   sendClickToBackend(clickEvent);
 }
 
-document.querySelectorAll("[data-track-id]").forEach(function (button) {
-  button.addEventListener("click", function () {
-    recordClick(button);
-  });
-});
-
 const modal = document.getElementById("promoModal");
-const promoBtn = document.getElementById("promoBtn");
+const bioButtons = document.getElementById("bioButtons");
 const closeBtn = document.querySelector(".close");
 
 function openModal() {
+  const promoBtn = document.querySelector("[data-promo-button]");
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
-  promoBtn.setAttribute("aria-expanded", "true");
+  if (promoBtn) {
+    promoBtn.setAttribute("aria-expanded", "true");
+  }
   closeBtn.focus();
 }
 
 function closeModal() {
+  const promoBtn = document.querySelector("[data-promo-button]");
   modal.classList.remove("is-open");
   modal.setAttribute("aria-hidden", "true");
-  promoBtn.setAttribute("aria-expanded", "false");
-  promoBtn.focus();
+  if (promoBtn) {
+    promoBtn.setAttribute("aria-expanded", "false");
+    promoBtn.focus();
+  }
 }
 
-promoBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  openModal();
+bioButtons.addEventListener("click", function (event) {
+  const button = event.target.closest("[data-track-id]");
+  if (!button) {
+    return;
+  }
+
+  recordClick(button);
+
+  if (button.dataset.promoButton === "true") {
+    event.preventDefault();
+    openModal();
+  }
 });
 
 closeBtn.addEventListener("click", closeModal);
@@ -594,6 +748,8 @@ document.addEventListener("keydown", function (event) {
     closeModal();
   }
 });
+
+loadBioConfig();
 </script>
 </body>
 </html>
