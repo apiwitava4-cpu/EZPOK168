@@ -8,6 +8,7 @@ const rootDir = __dirname;
 const dataDir = path.resolve(process.env.DATA_DIR || process.env.RAILWAY_VOLUME_MOUNT_PATH || path.join(rootDir, "data"));
 const statsFile = path.join(dataDir, "click-stats.json");
 const port = Number(process.env.PORT || 8787);
+const host = process.env.HOST || "0.0.0.0";
 const dashboardUser = process.env.DASHBOARD_USER || "admin";
 const dashboardPassword = process.env.DASHBOARD_PASSWORD || "ezpok1682026";
 const sessions = new Map();
@@ -389,8 +390,8 @@ async function handleRequest(req, res) {
 
 ensureDataFile()
   .then(() => {
-    http.createServer(handleRequest).listen(port, () => {
-      console.log(`EZPOK168 Bio analytics running at http://localhost:${port}`);
+    http.createServer(handleRequest).listen(port, host, () => {
+      console.log(`EZPOK168 Bio analytics running at http://${host}:${port}`);
       console.log(`Dashboard: http://localhost:${port}/dashboard.html`);
     });
   })
