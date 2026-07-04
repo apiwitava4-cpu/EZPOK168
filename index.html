@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EZPOK168 BIO</title>
+<meta name="theme-color" content="#100716">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #09040f;
+  --panel: rgba(18, 10, 26, .94);
+  --text: #fff7e8;
+  --muted: rgba(255, 247, 232, .78);
+  --gold: #f8d76b;
+  --violet: #7b2cff;
+  --magenta: #da3cff;
+  --line: rgba(248, 215, 107, .4);
+  font-family: Arial, "Tahoma", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 18% 12%, rgba(218, 60, 255, .22), transparent 32%),
+    radial-gradient(circle at 88% 22%, rgba(248, 215, 107, .18), transparent 28%),
+    linear-gradient(180deg, #09040f 0%, #191024 48%, #08050d 100%);
+}
+
+.card {
+  width: 100%;
+  max-width: 430px;
+  padding: 28px;
+  text-align: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 24px 78px rgba(0, 0, 0, .48), 0 0 36px rgba(123, 44, 255, .22);
+}
+
+.profile {
+  width: 154px;
+  height: 154px;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  border: 3px solid var(--gold);
+  border-radius: 50%;
+  background: #07040c;
+  box-shadow: 0 0 30px rgba(248, 215, 107, .24);
+}
+
+.profile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+h1 {
+  margin-bottom: 8px;
+  color: var(--gold);
+  font-size: 32px;
+  line-height: 1.15;
+}
+
+p {
+  margin-bottom: 28px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 54px;
+  margin-bottom: 14px;
+  padding: 14px 16px;
+  border: 0;
+  border-radius: 12px;
+  color: #120716;
+  background: linear-gradient(90deg, var(--gold), #c58f24 48%, var(--magenta));
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(218, 60, 255, .25);
+  filter: brightness(1.06);
+  outline: none;
+}
+
+footer {
+  margin-top: 12px;
+  color: rgba(255, 247, 232, .5);
+  font-size: 13px;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(5, 2, 9, .84);
+}
+
+.modal.is-open {
+  display: flex;
+}
+
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 940px;
+  max-height: 88vh;
+  overflow: auto;
+  padding: 22px;
+  background: #100716;
+  border: 1px solid var(--gold);
+  border-radius: 18px;
+  box-shadow: 0 20px 65px rgba(0, 0, 0, .5);
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(255, 255, 255, .12);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus-visible {
+  background: rgba(255, 255, 255, .2);
+  outline: none;
+}
+
+.modal h2 {
+  padding-right: 38px;
+  color: var(--gold);
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.promo-card {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(248, 215, 107, .35);
+  border-radius: 12px;
+  background: #050208;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .32);
+}
+
+.promo-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: #050208;
+}
+
+.promo-card figcaption {
+  padding: 10px 12px;
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  body {
+    padding: 18px;
+  }
+
+  .card {
+    padding: 22px;
+  }
+
+  .profile {
+    width: 132px;
+    height: 132px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .btn {
+    font-size: 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="card">
+  <div class="profile" aria-label="EZPOK168">
+    <img src="brand/brand-profile.webp" alt="EZPOK168">
+  </div>
+
+  <h1>EZPOK168</h1>
+  <p>บ้านป๊อกเด้งออนไลน์ โปรโมชั่นครบ จบในที่เดียว</p>
+
+  <a
+    class="btn"
+    href="https://www.ezpok168.net/?utm_source=bio&utm_medium=button&utm_campaign=ezpok168_service"
+    data-track-id="visit-site"
+    data-track-label="เข้าชมหน้าเว็บ"
+    target="_blank"
+    rel="noopener noreferrer">
+    เข้าชมหน้าเว็บ
+  </a>
+
+  <a
+    class="btn"
+    href="https://www.ezpok168.net/?utm_source=bio&utm_medium=button&utm_campaign=ezpok168_register"
+    data-track-id="register"
+    data-track-label="สมัครสมาชิก"
+    target="_blank"
+    rel="noopener noreferrer">
+    สมัครสมาชิก
+  </a>
+
+  <a class="btn" href="#" id="promoBtn" role="button" aria-controls="promoModal" aria-expanded="false" data-track-id="promotion" data-track-label="โปรโมชั่น">
+    โปรโมชั่น
+  </a>
+
+  <a
+    class="btn"
+    href="https://line.me/R/ti/p/@EZPOK?utm_source=bio&utm_medium=button&utm_campaign=ezpok168_service"
+    data-track-id="contact-admin"
+    data-track-label="ติดต่อแอดมิน"
+    target="_blank"
+    rel="noopener noreferrer">
+    ติดต่อแอดมิน
+  </a>
+
+  <footer>&copy; EZPOK168 BIO</footer>
+</main>
+
+<div class="modal" id="promoModal" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="promoTitle">
+    <button class="close" type="button" aria-label="ปิดหน้าต่าง">&times;</button>
+    <h2 id="promoTitle">โปรโมชั่นล่าสุด</h2>
+
+    <div class="gallery">
+      <figure class="promo-card">
+        <img src="promo/promo-register-5.webp" alt="โปรโมชั่นสมัครสมาชิกใหม่">
+        <figcaption>สมัครสมาชิกใหม่</figcaption>
+      </figure>
+
+      <figure class="promo-card">
+        <img src="promo/promo-deposit-60.webp" alt="โปรโมชั่นฝาก 60 บาท">
+        <figcaption>ฝาก 60 บาท</figcaption>
+      </figure>
+
+      <figure class="promo-card">
+        <img src="promo/promo-top100.webp" alt="โปรโมชั่น TOP100">
+        <figcaption>TOP100</figcaption>
+      </figure>
+
+      <figure class="promo-card">
+        <img src="promo/promo-one-click.webp" alt="โปรโมชั่นแทงไม้เดียว">
+        <figcaption>แทงไม้เดียว</figcaption>
+      </figure>
+
+      <figure class="promo-card">
+        <img src="promo/promo-first-deposit-10.webp" alt="โปรโมชั่นฝากบิลแรก">
+        <figcaption>ฝากบิลแรก</figcaption>
+      </figure>
+
+      <figure class="promo-card">
+        <img src="promo/promo-cashback-2.webp" alt="โปรโมชั่นคืนยอด 2 เปอร์เซ็นต์">
+        <figcaption>คืนยอด 2%</figcaption>
+      </figure>
+
+      <figure class="promo-card">
+        <img src="promo/promo-world-cup.webp" alt="โปรโมชั่น FIFA World Cup 2026">
+        <figcaption>FIFA World Cup 2026</figcaption>
+      </figure>
+
+      <figure class="promo-card">
+        <img src="promo/promo-top10.webp" alt="โปรโมชั่น TOP10">
+        <figcaption>TOP10</figcaption>
+      </figure>
+
+      <figure class="promo-card">
+        <img src="promo/promo-deposit-60-doomday.webp" alt="โปรโมชั่นฝาก 60 เพิ่ม doomsday">
+        <figcaption>ฝาก 60 เพิ่ม doomsday</figcaption>
+      </figure>
+
+      <figure class="promo-card">
+        <img src="promo/promo-cashback-2-special.webp" alt="โปรโมชั่นคืนยอดเสีย 2 เปอร์เซ็นต์">
+        <figcaption>คืนยอดเสีย 2%</figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
+
+<script>
+const clickStatsKey = "ezpok168BioClickStats";
+const trackedButtonDefaults = {
+  "visit-site": "เข้าชมหน้าเว็บ",
+  "register": "สมัครสมาชิก",
+  "promotion": "โปรโมชั่น",
+  "contact-admin": "ติดต่อแอดมิน"
+};
+
+function createClickStats() {
+  return {
+    version: 1,
+    createdAt: new Date().toISOString(),
+    updatedAt: null,
+    totalClicks: 0,
+    buttons: Object.fromEntries(
+      Object.entries(trackedButtonDefaults).map(function ([id, label]) {
+        return [id, { id: id, label: label, count: 0, lastClickedAt: null }];
+      })
+    ),
+    events: []
+  };
+}
+
+function loadClickStats() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(clickStatsKey));
+    const stats = saved && typeof saved === "object" ? saved : createClickStats();
+
+    Object.entries(trackedButtonDefaults).forEach(function ([id, label]) {
+      if (!stats.buttons) {
+        stats.buttons = {};
+      }
+
+      if (!stats.buttons[id]) {
+        stats.buttons[id] = { id: id, label: label, count: 0, lastClickedAt: null };
+      }
+    });
+
+    if (!Array.isArray(stats.events)) {
+      stats.events = [];
+    }
+
+    if (typeof stats.totalClicks !== "number") {
+      stats.totalClicks = Object.values(stats.buttons).reduce(function (sum, button) {
+        return sum + (Number(button.count) || 0);
+      }, 0);
+    }
+
+    return stats;
+  } catch (error) {
+    return createClickStats();
+  }
+}
+
+function saveClickStats(stats) {
+  try {
+    localStorage.setItem(clickStatsKey, JSON.stringify(stats));
+  } catch (error) {
+    console.warn("Unable to save click stats", error);
+  }
+}
+
+function sendClickToBackend(clickEvent) {
+  if (window.location.protocol === "file:") {
+    return;
+  }
+
+  const payload = JSON.stringify(clickEvent);
+
+  if (navigator.sendBeacon) {
+    try {
+      const sent = navigator.sendBeacon("/api/clicks", new Blob([payload], { type: "application/json" }));
+      if (sent) {
+        return;
+      }
+    } catch (error) {
+      console.warn("Unable to send click with beacon", error);
+    }
+  }
+
+  fetch("/api/clicks", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: payload,
+    keepalive: true
+  }).catch(function (error) {
+    console.warn("Unable to send click stats", error);
+  });
+}
+
+function recordClick(button) {
+  const id = button.dataset.trackId;
+  const label = button.dataset.trackLabel || trackedButtonDefaults[id] || button.textContent.trim();
+  const now = new Date().toISOString();
+  const stats = loadClickStats();
+  const clickEvent = {
+    id: id,
+    label: label,
+    href: button.getAttribute("href") || "",
+    page: window.location.pathname || "index.html",
+    clickedAt: now
+  };
+
+  if (!stats.buttons[id]) {
+    stats.buttons[id] = { id: id, label: label, count: 0, lastClickedAt: null };
+  }
+
+  stats.buttons[id].label = label;
+  stats.buttons[id].count += 1;
+  stats.buttons[id].lastClickedAt = now;
+  stats.totalClicks += 1;
+  stats.updatedAt = now;
+  stats.events.unshift(clickEvent);
+  stats.events = stats.events.slice(0, 200);
+
+  saveClickStats(stats);
+  sendClickToBackend(clickEvent);
+}
+
+document.querySelectorAll("[data-track-id]").forEach(function (button) {
+  button.addEventListener("click", function () {
+    recordClick(button);
+  });
+});
+
+const modal = document.getElementById("promoModal");
+const promoBtn = document.getElementById("promoBtn");
+const closeBtn = document.querySelector(".close");
+
+function openModal() {
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  promoBtn.setAttribute("aria-expanded", "true");
+  closeBtn.focus();
+}
+
+function closeModal() {
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  promoBtn.setAttribute("aria-expanded", "false");
+  promoBtn.focus();
+}
+
+promoBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  openModal();
+});
+
+closeBtn.addEventListener("click", closeModal);
+
+modal.addEventListener("click", function (event) {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape" && modal.classList.contains("is-open")) {
+    closeModal();
+  }
+});
+</script>
+</body>
+</html>
