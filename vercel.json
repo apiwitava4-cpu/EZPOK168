@@ -2,8 +2,20 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
+      "source": "/dashboard",
+      "destination": "/dashboard.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/dashboard.html"
+    },
+    {
       "source": "/api/export.csv",
       "destination": "/api/export"
+    },
+    {
+      "source": "/uploads/(.*)",
+      "destination": "https://ezpok168-bio-analytics.onrender.com/uploads/$1"
     }
   ]
 }
